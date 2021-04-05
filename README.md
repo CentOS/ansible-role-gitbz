@@ -7,13 +7,11 @@ See also [ansible-infra-playbooks](https://github.com/CentOS/ansible-infra-playb
 
 ### Variables
 See [defaults variables and explanations](defaults/main.yml)
+The `gitlab_runner_registration_token` must be overridden with a valid token.
 
 ### Dependencies
-This role can depend on some other roles, either statically defined, or dynamically included/imported:
-  * See [meta/main.yml](meta/main.yml)
-  * Or each <task>.yml under tasks folder for included/imported roles
-
-All those roles are declared in our [requirements.yml](https://github.com/CentOS/ansible-infra-playbooks/blob/master/requirements-production.yml) file.
+This role requires [riemers.gitlab-runner](https://galaxy.ansible.com/riemers/gitlab-runner) from Ansible Galaxy.
+  * Install it with `ansible-galaxy role install -r meta/requirements.yml`
 
 ### License
 MIT (see [LICENSE](LICENSE) file)

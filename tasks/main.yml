@@ -1,2 +1,35 @@
 ---
-# tasks file for gitbz
+- name: "Remove Podman"
+  yum:
+    name:
+      - podman
+      - runc
+      - buildah
+    state: absent
+
+- name: "Install Docker repo GPG key"
+  rpm_key:
+    key: https://download.docker.com/linux/centos/gpg
+
+- name: "Install Docker repo"
+  yum_repository:
+    name: docker
+    description: Docker YUM repo
+    baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+
+- name: "Install Docker tools"
+  yum:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+
+- name: "Enable the Docker daemon"
+  service:
+    name: docker.service
+    enabled: yes
+    state: started
+
+- include_role:
+    name: riemers.gitlab-runner
